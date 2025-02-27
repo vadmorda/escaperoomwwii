@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWII Escape Room</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        #game-container {
+            max-width: 800px;
+            margin: auto;
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .mission {
+            background: #0f3460;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            display: none;
+        }
+        #mission1 {
+            display: block;
+        }
+        input, button, textarea {
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #e94560;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ff3860;
+        }
+    </style>
+    <script>
+        function checkAnswer(mission, correctAnswers, nextMissionId) {
+            let correct = true;
+            for (let key in correctAnswers) {
+                if (document.getElementById(key).value.trim().toLowerCase() !== correctAnswers[key].toLowerCase()) {
+                    correct = false;
+                    break;
+                }
+            }
+            if (correct) {
+                document.getElementById(mission).style.display = "none";
+                document.getElementById(nextMissionId).style.display = "block";
+            } else {
+                alert("Incorrect. Try again!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="game-container">
+        <h1>WWII Escape Room</h1>
+        <p>The world is in crisis. It's 1945, World War II has ended, but the future remains uncertain. Solve these challenges to ensure world peace.</p>
+        
+        <div class="mission" id="mission1">
+            <h2>Mission 1: The Mystery of Secret Agreements</h2>
+            <ul>
+                <li><input type="text" id="treaty1" placeholder="Treaty Name"> - "Signed in 1938, allowed Germany to annex the Sudetenland without resistance."</li>
+                <li><input type="text" id="treaty2" placeholder="Treaty Name"> - "Signed in 1919, imposed severe economic and territorial sanctions on Germany."</li>
+                <li><input type="text" id="treaty3" placeholder="Treaty Name"> - "Non-aggression pact between Nazi Germany and the Soviet Union in 1939."</li>
+                <li><input type="text" id="treaty4" placeholder="Treaty Name"> - "Agreement between Germany, Japan, and Italy against the expansion of communism."</li>
+            </ul>
+            <button onclick="checkAnswer('mission1', {treaty1: 'Munich Agreement', treaty2: 'Treaty of Versailles', treaty3: 'Ribbentrop-Molotov Pact', treaty4: 'Anti-Comintern Pact'}, 'mission2')">Submit</button>
+        </div>
+        
+        <div class="mission" id="mission2">
+            <h2>Mission 2: WWII Leaders</h2>
+            <ul>
+                <li><input type="text" id="leader1" placeholder="W_ _ _ _ _ C_ _ _ _ _ _ _ _"> (British PM)</li>
+                <li><input type="text" id="leader2" placeholder="J_ _ _ _ _ S_ _ _ _ _"> (US President)</li>
+                <li><input type="text" id="leader3" placeholder="A_ _ _ _ _ H_ _ _ _ _"> (Nazi Leader)</li>
+                <li><input type="text" id="leader4" placeholder="J_ _ _ _ _ S_ _ _ _ _"> (Soviet Leader)</li>
+            </ul>
+            <button onclick="checkAnswer('mission2', {leader1: 'Winston Churchill', leader2: 'Joseph Stalin', leader3: 'Adolf Hitler', leader4: 'Joseph Stalin'}, 'mission3')">Submit</button>
+        </div>
+        
+        <div class="mission" id="mission3">
+            <h2>Mission 3: Key Events of WWII</h2>
+            <ul>
+                <li><input type="number" id="event1"> Pearl Harbor Bombing</li>
+                <li><input type="number" id="event2"> D-Day</li>
+                <li><input type="number" id="event3"> Non-Aggression Pact</li>
+                <li><input type="number" id="event4"> Liberation of Paris</li>
+                <li><input type="number" id="event5"> Hiroshima & Nagasaki Bombing</li>
+            </ul>
+            <button onclick="checkAnswer('mission3', {event1: '1941', event2: '1944', event3: '1939', event4: '1944', event5: '1945'}, 'mission4')">Submit</button>
+        </div>
+        
+        <div class="mission" id="mission4">
+            <h2>Mission 4: Deciphering the Resistance Code</h2>
+            <p>Decrypt this message using a Caesar cipher (shift 3 letters back):</p>
+            <p><strong>Wklv lv d phvvdjh ri uhdlvwdqfh.</strong></p>
+            <input type="text" id="cipher" placeholder="Decrypted Message">
+            <button onclick="checkAnswer('mission4', {cipher: 'this is a message of resistance'}, 'mission5')">Submit</button>
+        </div>
+    </div>
+</body>
+</html>
